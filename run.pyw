@@ -19,7 +19,7 @@ replace = os.path.abspath(os.path.join(baseDir, os.pardir))
 xdir = replace
 replace = replace + r'\Resources\bitmaps\interface11\image_background_screenshot_for_stack.png'
 
-# Copy that image into the desktop image
+# Copy that image into the menu image
 copyfile(os.path.join(photo, image), replace)
 
 # Start X-Plane
