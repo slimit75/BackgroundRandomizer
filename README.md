@@ -1,8 +1,6 @@
 # XP-RandomBackground
 Provides a random background image at startup for X-Plane 11.
 
-# DISCLAIMER: This is unfinished and may be broken.
-
 ## Requirements
 - The latest Python 3 version, developed for Python 3.7.3
 - X-Plane 11 (untested on X-Plane 10)
