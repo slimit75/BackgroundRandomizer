@@ -3,7 +3,7 @@ Provides a random background image at startup for X-Plane 11.
 
 ## Requirements
 - The latest Python 3 version, developed for Python 3.7.3
-- X-Plane 11 (untested on X-Plane 10)
+- X-Plane 11
 
 ## How to install
 - On the releases page, under 'Assets', download the "X-Plane Random Background Generator" file.
