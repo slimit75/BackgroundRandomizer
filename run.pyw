@@ -12,7 +12,6 @@ photo = photo + r'\Screenshots'
 onlyfiles = next(os.walk(photo))[2]
 file = random.randint(0,len(onlyfiles)-1)
 image = onlyfiles[file]
-print(image)
 
 # Get the path of the actual file to replace
 replace = os.path.abspath(os.path.join(baseDir, os.pardir))
