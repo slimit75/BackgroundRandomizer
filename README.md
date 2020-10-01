@@ -1,6 +1,6 @@
 # XP-RandomBackground
 Provides a random background image at startup for X-Plane 11.
-**Notice, as of XRBG 1.1, you may not see a custom background on first start.**
+**NOTE: as of XRBG 1.1, you may not see a custom background on first start.**
 
 ## Requirements
 - FlyWithLua
