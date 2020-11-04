@@ -8,7 +8,10 @@ for photo in io.popen('dir "'.. screenshotsFolder ..'" /b'):lines() do
     photos[i] = photo
 end
 
-file = screenshotsFolder .. photos[math.random(#photos)]
+math.randomseed(os.time())
+rand = math.random(#photos)
+print(rand)
+file = screenshotsFolder .. photos[math.floor(rand)]
 
 backgroundPath = string.gsub(SCRIPT_DIRECTORY, "plugins/FlyWithLua/Scripts/", "bitmaps/interface11/image_background_screenshot_for_stack.png")
 
