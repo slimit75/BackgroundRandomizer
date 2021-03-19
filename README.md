@@ -1,6 +1,8 @@
-# XP-RandomBackground
-Provides a random background image at startup for X-Plane 11.
-**NOTE: as of XRBG 1.1, you may not see a custom background on first start.**
+# BackgroundRandomizer
+*originally XP-BackgroundRandomizer*
+
+BackgroundRandomizer changes the background of your X-Plane menu every time you reload your simulator. 
+**NOTE: as of the current version, you may not see a custom background on first start.**
 
 ## Requirements
 - FlyWithLua
@@ -13,4 +15,4 @@ Provides a random background image at startup for X-Plane 11.
 - Drop your screenshots into the XRBG folder
 
 ## How to revert back to the default background image
-Run the installer as if you were updating X-Plane, and overwrite all files it says were modified. This may effect other addons, such as Airport Enviroment HD. If it does effect other addons, just reinstall them.
+Run the installer as if you were updating X-Plane, and overwrite all files it says were modified. Keep in mind that this will effect other addons as well.
