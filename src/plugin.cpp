@@ -28,14 +28,14 @@ using namespace std::filesystem;
 using std::filesystem::current_path;
 
 PLUGIN_API int XPluginStart(char* plugin_name, char* plugin_signature, char* plugin_description) {
-    XPLMDebugString("[BackgroundRandomizer] Starting v2.0\n");
+    XPLMDebugString("<BackgroundRandomizer> Starting v2.0\n");
     try {
         strcpy(plugin_name, "BackgroundRandomizer");
-        strcpy(plugin_signature, "3dash.BackgroundRandomizer");
+        strcpy(plugin_signature, "simsolutions.BackgroundRandomizer");
         strcpy(plugin_description, "BackgroundRandomizer changes the background image of X-Plane's menus.");
     }
     catch (exception& e) {
-        XPLMDebugString("[BackgroundRandomizer] ERROR: ");
+        XPLMDebugString("<BackgroundRandomizer> ERROR: ");
         XPLMDebugString(e.what());
         XPLMDebugString("\n");
     }
@@ -66,10 +66,10 @@ PLUGIN_API int  XPluginEnable(void) {
 
         remove(destPath);
         copy(backgroundPath, destPath, copy_options::update_existing);
-        XPLMDebugString("[BackgroundRandomizer] Background successfully set.\n");
+        XPLMDebugString("<BackgroundRandomizer> Background successfully set.\n");
     }
     catch (exception& e) {
-        XPLMDebugString("[BackgroundRandomizer] ERROR: ");
+        XPLMDebugString("<BackgroundRandomizer> ERROR: ");
         XPLMDebugString(e.what());
         XPLMDebugString("\n");
     }
