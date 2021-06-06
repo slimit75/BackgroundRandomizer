@@ -2,6 +2,7 @@
 #include <string>
 #include <fstream>
 #include <filesystem>
+#include <cmath>
 #include "XPLMDisplay.h"
 #include "XPLMUtilities.h"
 #include "XPLMPlugin.h"
@@ -59,7 +60,7 @@ PLUGIN_API int  XPluginEnable(void) {
 
         srand((unsigned)time(NULL));
 
-        int selectedBackground = rand() % (i - 1);
+        int selectedBackground = rand() % i + 1;
 
         path backgroundPath = backgrounds[selectedBackground];
         path destPath = current_path() += "/Resources/bitmaps/interface11/image_background_screenshot_for_stack.png";
