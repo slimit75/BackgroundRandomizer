@@ -2,7 +2,6 @@
 #include <string>
 #include <fstream>
 #include <filesystem>
-#include <cmath>
 #include "XPLMDisplay.h"
 #include "XPLMUtilities.h"
 #include "XPLMPlugin.h"
@@ -54,13 +53,29 @@ PLUGIN_API int  XPluginEnable(void) {
         int i = 0;
 
         for (const auto& entry : directory_iterator(backgroundsFolder)) {
-            backgrounds[i] = entry.path();
+            backgrounds[i + 1] = entry.path();
             i = i + 1;
         }
 
-        srand((unsigned)time(NULL));
+        srand(time(NULL));
 
-        int selectedBackground = rand() % (i - 1);
+        int selectedBackground = rand() % i + 1;
+
+        XPLMDebugString("<BackgroundRandomizer> Debug: ");
+        int x = 0;
+        while (x < selectedBackground) {
+            XPLMDebugString("#");
+            x++;
+        }
+        XPLMDebugString("\n");
+
+        // prevent accidental deletion of background image and fatal error of x-plane
+        if (selectedBackground > i) {
+            selectedBackground = i;
+        }
+        else if (selectedBackground < 1) {
+            selectedBackground = 1;
+        }
 
         path backgroundPath = backgrounds[selectedBackground];
         path destPath = current_path() += "/Resources/bitmaps/interface11/image_background_screenshot_for_stack.png";
