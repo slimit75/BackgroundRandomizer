@@ -2,6 +2,7 @@
 #include <string>
 #include <fstream>
 #include <filesystem>
+#include <vector>
 #include "XPLMDisplay.h"
 #include "XPLMUtilities.h"
 #include "XPLMPlugin.h"
@@ -27,59 +28,37 @@ using namespace std;
 using namespace std::filesystem;
 using std::filesystem::current_path;
 
+// Callbacks.
 PLUGIN_API int XPluginStart(char* plugin_name, char* plugin_signature, char* plugin_description) {
-    XPLMDebugString("<BackgroundRandomizer> Starting v2.0\n");
-    try {
-        strcpy(plugin_name, "BackgroundRandomizer");
-        strcpy(plugin_signature, "simsolutions.BackgroundRandomizer");
-        strcpy(plugin_description, "BackgroundRandomizer changes the background image of X-Plane's menus.");
-    }
-    catch (exception& e) {
-        XPLMDebugString("<BackgroundRandomizer> ERROR: ");
-        XPLMDebugString(e.what());
-        XPLMDebugString("\n");
-    }
+    strcpy(plugin_name, "BackgroundRandomizer");
+    strcpy(plugin_signature, "simsolutions.BackgroundRandomizer");
+    strcpy(plugin_description, "BackgroundRandomizer changes the background image of X-Plane's menus. Each background is randomly chosen at the previous startup.");
     return 1;
 }
-
 PLUGIN_API void	XPluginStop(void) { }
 PLUGIN_API void XPluginDisable(void) { }
-
 PLUGIN_API int  XPluginEnable(void) { 
     try {
+        XPLMDebugString("<BackgroundRandomizer> Starting...\n");
+
+        // Define variables
         path backgroundsFolder = current_path() += "/Resources/plugins/BackgroundRandomizer/Images";
-        path backgrounds[100];
+        vector<path> backgroundList;
 
-        int i = 0;
-
+        // Get list of backgrounds
         for (const auto& entry : directory_iterator(backgroundsFolder)) {
-            backgrounds[i + 1] = entry.path();
-            i = i + 1;
+            backgroundList.push_back(entry.path());
         }
 
+        // Get random number that corresponds to a background.
         srand(time(NULL));
+        int randNumber = rand() % backgroundList.size();
 
-        int selectedBackground = rand() % i + 1;
-
-        XPLMDebugString("<BackgroundRandomizer> Debug: ");
-        int x = 0;
-        while (x < selectedBackground) {
-            XPLMDebugString("#");
-            x++;
-        }
-        XPLMDebugString("\n");
-
-        // prevent accidental deletion of background image and fatal error of x-plane
-        if (selectedBackground > i) {
-            selectedBackground = i;
-        }
-        else if (selectedBackground < 1) {
-            selectedBackground = 1;
-        }
-
-        path backgroundPath = backgrounds[selectedBackground];
+        // Figure out our destination path & background path.
+        path backgroundPath = backgroundList.at(randNumber);
         path destPath = current_path() += "/Resources/bitmaps/interface11/image_background_screenshot_for_stack.png";
 
+        // Copy over the new background.
         remove(destPath);
         copy(backgroundPath, destPath, copy_options::update_existing);
         XPLMDebugString("<BackgroundRandomizer> Background successfully set.\n");
