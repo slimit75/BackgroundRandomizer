@@ -1,0 +1,8 @@
+.vs/
+Debug/
+Release/
+src/SDK/*
+*.sln
+*.vcxproj
+*.vcxproj.*
+src/Makefile
