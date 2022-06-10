@@ -1,0 +1,3 @@
+[submodule "libs/XSDK"]
+	path = libs/XSDK
+	url = https://github.com/fpw/XSDK
