@@ -10,8 +10,11 @@
 #include <cstring>
 
 // Variables
-std::filesystem::path backgroundsFolder = std::filesystem::current_path() += "/Resources/plugins/BackgroundRandomizer/images";
-std::filesystem::path destPath = std::filesystem::current_path() += "/Resources/bitmaps/interface11/image_background_screenshot_for_stack.png";
+char xpPath[512];
+std::string backgroundsFolder;
+std::string destinationPath;
+std::string relativeImagesDirectory = "/Resources/plugins/BackgroundRandomizer/images";
+std::string relativeDestinationPath = "/Resources/bitmaps/interface11/image_background_screenshot_for_stack.png";
 std::filesystem::path backgroundPath;
 std::vector<std::filesystem::path> backgroundList;
 
@@ -21,6 +24,12 @@ PLUGIN_API int XPluginStart(char* plugin_name, char* plugin_signature, char* plu
     strcpy(plugin_signature, "slimit75.BackgroundRandomizer");
     strcpy(plugin_description, "BackgroundRandomizer changes the background image of X-Plane's menus. Each background is randomly chosen at the previous startup.");
     
+    XPLMEnableFeature("XPLM_USE_NATIVE_PATHS", 1);
+    XPLMGetSystemPath(xpPath);
+
+    backgroundsFolder = xpPath + relativeImagesDirectory;
+    destinationPath = xpPath + relativeDestinationPath;
+
     XPLMDebugString("[BackgroundRandomizer] Finding new background...\n");
     try {
         // Get list of available backgrounds
@@ -34,8 +43,8 @@ PLUGIN_API int XPluginStart(char* plugin_name, char* plugin_signature, char* plu
         backgroundPath = backgroundList.at(randNumber); 
 
         // Copy over new background to the existing background
-        remove(destPath);
-        copy(backgroundPath, destPath, std::filesystem::copy_options::update_existing);
+        std::filesystem::remove(destinationPath);
+        std::filesystem::copy(backgroundPath, destinationPath, std::filesystem::copy_options::update_existing);
         XPLMDebugString("[BackgroundRandomizer] Background successfully set.\n");
     }
     catch (std::exception& e) {
