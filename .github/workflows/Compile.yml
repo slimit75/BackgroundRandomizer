@@ -21,11 +21,11 @@ jobs:
 
     - name: Build
       run: cmake --build .
-    
-    - run: git pull origin main
-    - uses: stefanzweifel/git-auto-commit-action@v4
+
+    - uses: actions/upload-artifact@v3
       with:
-        commit_message: Mac Build
+        name: mac.xpl
+        path: 64/mac.xpl
 
   Linux:
     runs-on: ubuntu-20.04
@@ -43,10 +43,10 @@ jobs:
     - name: Build
       run: cmake --build .
     
-    - run: git pull origin main
-    - uses: stefanzweifel/git-auto-commit-action@v4
+    - uses: actions/upload-artifact@v3
       with:
-        commit_message: Linux Build
+        name: lin.xpl
+        path: 64/lin.xpl
         
   Windows:
     runs-on: windows-2019
@@ -76,7 +76,7 @@ jobs:
     - name: Build
       run: cmake --build .
 
-    - run: git pull origin main
-    - uses: stefanzweifel/git-auto-commit-action@v4
+    - uses: actions/upload-artifact@v3
       with:
-        commit_message: Windows Build
+        name: win.xpl
+        path: 64/win.xpl
