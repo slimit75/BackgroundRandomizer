@@ -1,0 +1,80 @@
+name: Compile
+
+on:
+  workflow_dispatch:
+
+jobs:
+  Mac:
+    runs-on: macos-10.15
+
+    steps:
+    - uses: actions/checkout@v3
+    
+    - name: Clone fpw/XSDK
+      run: git clone https://github.com/fpw/XSDK
+      working-directory: ./libs
+      
+    - name: Configure CMake
+      run: cmake .
+
+    - name: Build
+      run: cmake --build .
+    
+    - run: git pull origin main
+    - uses: stefanzweifel/git-auto-commit-action@v4
+      with:
+        commit_message: Mac Build
+
+  Linux:
+    runs-on: ubuntu-20.04
+
+    steps:
+    - uses: actions/checkout@v3
+
+    - name: Clone fpw/XSDK
+      run: git clone https://github.com/fpw/XSDK
+      working-directory: ./libs
+    
+    - name: Configure CMake
+      run: cmake .
+
+    - name: Build
+      run: cmake --build .
+    
+    - run: git pull origin main
+    - uses: stefanzweifel/git-auto-commit-action@v4
+      with:
+        commit_message: Linux Build
+        
+  Windows:
+    runs-on: windows-2019
+
+    steps:
+    - uses: actions/checkout@v3
+    
+    - uses: msys2/setup-msys2@v2
+      with:
+        update: true
+        install: >-
+          mingw-w64-x86_64-cmake
+          mingw-w64-x86_64-ninja
+          mingw-w64-x86_64-msmpi
+
+    - name: Put MSYS2_MinGW64 on PATH
+      # there is not yet an environment variable for this path from msys2/setup-msys2
+      run: echo "${{ runner.temp }}/msys64/mingw64/bin" | Out-File -FilePath $env:GITHUB_PATH -Encoding utf8 -Append
+
+    - name: Clone fpw/XSDK
+      run: git clone https://github.com/fpw/XSDK
+      working-directory: ./libs
+
+    - name: Configure CMake
+      run: cmake . -G "MinGW Makefiles"
+
+    - name: Build
+      run: cmake --build .
+
+    - run: git pull origin main
+    - uses: stefanzweifel/git-auto-commit-action@v4
+      with:
+        commit_message: Windows Build
