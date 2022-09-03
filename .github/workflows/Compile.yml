@@ -7,7 +7,7 @@ on:
 
 jobs:
   Mac:
-    runs-on: macos-10.15
+    runs-on: macos-latest
 
     steps:
     - uses: actions/checkout@v3
@@ -28,7 +28,7 @@ jobs:
         path: 64/mac.xpl
 
   Linux:
-    runs-on: ubuntu-20.04
+    runs-on: ubuntu-latest
 
     steps:
     - uses: actions/checkout@v3
@@ -49,23 +49,11 @@ jobs:
         path: 64/lin.xpl
         
   Windows:
-    runs-on: windows-2019
+    runs-on: windows-latest
 
     steps:
     - uses: actions/checkout@v3
     
-    - uses: msys2/setup-msys2@v2
-      with:
-        update: true
-        install: >-
-          mingw-w64-x86_64-cmake
-          mingw-w64-x86_64-ninja
-          mingw-w64-x86_64-msmpi
-
-    - name: Put MSYS2_MinGW64 on PATH
-      # there is not yet an environment variable for this path from msys2/setup-msys2
-      run: echo "${{ runner.temp }}/msys64/mingw64/bin" | Out-File -FilePath $env:GITHUB_PATH -Encoding utf8 -Append
-
     - name: Clone fpw/XSDK
       run: git clone https://github.com/fpw/XSDK
       working-directory: ./libs
