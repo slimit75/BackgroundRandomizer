@@ -24,7 +24,7 @@ jobs:
 
     - uses: actions/upload-artifact@v3
       with:
-        name: mac.xpl
+        name: Binaries
         path: 64/mac.xpl
 
   Linux:
@@ -45,7 +45,7 @@ jobs:
     
     - uses: actions/upload-artifact@v3
       with:
-        name: lin.xpl
+        name: Binaries
         path: 64/lin.xpl
         
   Windows:
@@ -66,5 +66,5 @@ jobs:
 
     - uses: actions/upload-artifact@v3
       with:
-        name: win.xpl
+        name: Binaries
         path: 64/win.xpl
