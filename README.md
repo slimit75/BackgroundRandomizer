@@ -1,9 +1,9 @@
 # BackgroundRandomizer
-BackgroundRandomizer changes the background of your X-Plane menu every time you open your simulator. When starting your simulator, the background that is using is decided by the last startup. **As a result, no changes to your background may occur when first starting the plugin.**
+BackgroundRandomizer is a simple plugin that changes the background of your X-Plane menu every time you open your simulator. It works by scanning a folder for the images you want to use, selecting a random image, and then updates the file used by X-Plane. *Next time the simulator is opened the randomly selected image is displayed, so the first time you launch X-Plane with this plugin you may not notice a difference.*
 
 ## Requirements
-- X-Plane 11
-- Windows or Linux
+- X-Plane 11 or 12
+- Windows, Mac or Linux
 
-## How to revert back to the default background image
-Run the installer as if you were updating X-Plane, and overwrite all files it says were modified. Keep in mind that this will effect other addons as well. Alternatively, you can only choose to overwrite `image_background_screenshot_for_stack.png`.
+## Reverting back to the default image
+To revert back to the default image, simply run the X-Plane installer or verify files on Steam. You will be prompted to overwrite changed files, so if you don't want to affect other addons, make sure to only overwrite `/Resources/bitmaps/interface11/image_background_screenshot_for_stack.png`!
