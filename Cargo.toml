@@ -1,0 +1,15 @@
+[package]
+name = "background-randomizer"
+version = "3.0.0-beta.1"
+edition = "2021"
+
+# See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
+[lib]
+path = "src/lib.rs"
+bench = true
+crate-type = ["dylib"]
+
+[dependencies]
+rand = "0.8.5"
+xplm = "0.3.1"
+xplm-sys = "0.4.0"
