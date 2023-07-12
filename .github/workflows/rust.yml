@@ -11,12 +11,25 @@ env:
 
 jobs:
   build:
+    strategy:
+      matrix:
+        os:
+          - ubuntu-latest
+          - windows-latest
+          - macos-latest
 
-    runs-on: ubuntu-latest
+    runs-on: ${{matrix.os}}
 
     steps:
-    - uses: actions/checkout@v3
-    - name: Build
-      run: cargo build --verbose
-    - name: Run tests
-      run: cargo test --verbose
+      - uses: actions/checkout@v3
+
+      - name: Build
+        run: cargo build --release --verbose
+
+      - name: Run tests
+        run: cargo test --verbose
+
+      - uses: actions/upload-artifact@v3.1.2
+        with:
+          name: ${{runner.os}} Binaries
+          path: target/release/libbackground_randomizer.so
